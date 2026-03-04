@@ -19,6 +19,3 @@ def returns_lagger(df,lim):
         df = df.iloc[16:]
         return df.drop("Close",axis=1)
 
-
-"""example print, feel free to delete"""
-print(returns_lagger(sp,10))
