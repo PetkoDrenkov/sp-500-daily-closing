@@ -1,7 +1,7 @@
 import pandas as pd
 import numpy as np
 
-sp = pd.read_csv("/home/petko/Desktop/SPY_close_price_5Y.csv")
+sp = pd.read_csv("https://github.com/PetkoDrenkov/sp-500-daily-closing/blob/main/data/SP_close_price_5Y.csv")
 sp.drop("Date",axis=1,inplace=True)
 sp["returns"] = np.log(sp["Close"]) - np.log(sp["Close"].shift(1))
 
