@@ -52,8 +52,5 @@ mse_15 = mean_squared_error(labels[:992], predict_15)
 with open("fit_15.pkl", "wb") as reg_15:
     pickle.dump(fit_15, reg_15)
 
-print(f"mse_2: {mse_2}\nmse_3: {mse_3}\nmse_5: {mse_5}\nmse_7: {mse_7}\nmse_11: {mse_11}\nmse_15: {mse_15}")
+# print(f"mse_2: {mse_2}\nmse_3: {mse_3}\nmse_5: {mse_5}\nmse_7: {mse_7}\nmse_11: {mse_11}\nmse_15: {mse_15}")
 
-# the object stored in the variable is reused, so the print below evaluates
-# to true, but the pickling is made directly after each model creation, before the overwriting
-print(fit_2 is fit_15)
