@@ -9,8 +9,8 @@ The labels are logarithmic returns: R = Log(P_(i)/P_(i-1)) = Log(P(i)) - Log(P(i
 
 
 ## Split
-The train-validation-test split is chronological with 80-10-10 ratio.The python files should be read in this order: starting with ‘lag_features.py’, where we create a function that generates features from the dataset, we then move on to ‘training_models.py’, where different versions of Linear Regression are trained and the trained fits are saved in pickle files, that can later be opened in another file. In the file ‘validation.py’ the pickles with the saved fits are opened and tested on the validation set, where the plots and mean squared errors are shown in the notebook ‘validation_plots.ipynb’.
-The code isn’t as clean as it can be, but it does get the job done as the results clearly demonstrate: as one might logically conclude, the smaller lag depths are likely to underfut due to not good enough of an encapsulation of the available information and the too large lag depths will likely overfit due to fitting noice, and this is exactly what the validation test shows.  The question is where is the balance. The mean squared error of the set with lag depth of five is the smallest! 
+The train-validation-test split is chronological with 80-10-10 ratio.The python files should be read in this order: starting with **‘lag_features.py’**, where we create a function that generates features from the dataset, we then move on to **‘training_models.py’**, where different versions of Linear Regression are trained and the trained fits are saved in pickle files, that can later be opened in another file. In the file **‘validation.py’** the pickles with the saved fits are opened and tested on the validation set, where the point is to compare the different sets of features, each with different lag depth, and the plots and mean squared errors are shown in the notebook ‘validation_plots.ipynb’.
+The code isn’t as clean as it can be, but it does get the job done as the results clearly demonstrate: as one might logically conclude, the smaller lag depths are likely to underfut due to not good enough of an encapsulation of the available information, and the too large lag depths will likely overfit due to fitting noice, and this is exactly what the validation test shows. The mean squared error of the set with lag depth of five is the smallest. 
 
 ## Notebooks
 Every part of the project is visualized on the Jupyter Notebooks as follows:\
@@ -27,7 +27,7 @@ mse_5_val: 0.0002508051033025137\
 mse_7_val: 0.00025201486965832794\
 mse_11_val: 0.00025789092386182226\
 mse_15_val: 0.0002592820095214613\
-The mse of the lag-depth-5 model is the smallest, so this is the set of features that wins the validation stage and moves on.
+The mse of the lag-depth-5 model is the smallest, so this is the set of features that wins the validation stage and moves on to retraining.
 
 
 
