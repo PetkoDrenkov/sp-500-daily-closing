@@ -5,7 +5,8 @@ I model logarithmic returns rather than price levels because price is non-statio
 
 
 ## Features
-The labels are logarithmic returns: R = Log(P_(i)/P_(i-1)) = Log(P(i)) - Log(P(i-1)) and the features are time-shifted log returns, because the interest of this project is to monitor autocorrelation of time series.
+The labels are logarithmic returns: R = Log(P_(i)/P_(i-1)) = Log(P(i)) - Log(P(i-1)) and the features are time-shifted log returns, because the interest of this project is to monitor autocorrelation of time series. I loaded the dataset from my desktop, but it is uploaded (under the name 'SP_close_price_5Y.csv') to this repository in the folder 'data', so you can download the csv file and recreate or modify the project on your computer if you want to. I downloaded the dataset from this website:  (https://mavenanalytics.io/data-drills/turning-bullish).
+
 
 ## Split
 The train-validation-test split is chronological with 80-10-10 ratio.The python files should be read in this order: starting with ‘lag_features.py’, where we create a function that generates features from the dataset, we then move on to ‘training_models.py’, where different versions of Linear Regression are trained and the trained fits are saved in pickle files, that can later be opened in another file. In the file ‘validation.py’ the pickles with the saved fits are opened and tested on the validation set, where the plots and mean squared errors are shown in the notebook ‘validation_plots.ipynb’.
