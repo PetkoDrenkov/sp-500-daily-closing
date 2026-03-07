@@ -18,4 +18,4 @@ Every part of the project is visualized on the Jupyter Notebooks as follows:\
 
 
 
-## As of now, the project is still in development.
+### The project is still in development.
