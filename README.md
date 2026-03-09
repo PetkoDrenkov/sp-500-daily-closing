@@ -20,6 +20,8 @@ Every part of the project is visualized on the Jupyter Notebooks as follows:\
 '4_validation_plots.ipynb' shows how the predictions do on the validation set and then numerically compares them evaluating their mse-s.\
 
 ## Results
+
+### Validation
 The results of the trained models with different lag depths, on the validation test, are given below:\
 mse_2_val: 0.00025336930547826414\
 mse_3_val: 0.00025090380979842555\
