@@ -2,7 +2,8 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import mean_squared_error
 import pickle
-from src.training_models import feat_2, feat_3, feat_5, feat_7, feat_11, feat_15
+from src.b_training_models import feat_2, feat_3, feat_5, feat_7, feat_11, feat_15
+
 
 with open("labels.pkl", 'rb') as labels:
     labels = pickle.load(labels)
@@ -37,5 +38,4 @@ with open("fit_15.pkl", 'rb') as reg_15:
     fit_15 = pickle.load(reg_15)
 df_15 = pd.DataFrame(feat_15)[992:1116]
 mse_15_val = mean_squared_error(fit_15.predict(df_15),labels[992:1116])
-
 

@@ -1,5 +1,5 @@
 import pandas as pd
-from src.lag_features import returns_lagger, sp
+from src.a_lag_features import returns_lagger, sp
 import pickle
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, r2_score

@@ -1,4 +1,4 @@
-from src.lag_features import sp, returns_lagger
+from src.a_lag_features import sp, returns_lagger
 from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error
 import pandas as pd
@@ -51,6 +51,4 @@ predict_15 = lin_reg.predict(feat_15.iloc[:992,:])
 mse_15 = mean_squared_error(labels[:992], predict_15)
 with open("fit_15.pkl", "wb") as reg_15:
     pickle.dump(fit_15, reg_15)
-
-# print(f"mse_2: {mse_2}\nmse_3: {mse_3}\nmse_5: {mse_5}\nmse_7: {mse_7}\nmse_11: {mse_11}\nmse_15: {mse_15}")
 
