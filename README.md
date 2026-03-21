@@ -16,7 +16,7 @@ The python files with the main code are in the source folder, called 'src'. The 
 The code isn’t as clean as it can be, but it does get the job done as the results clearly demonstrate: as one might logically conclude, the smaller lag depths are likely to underfut due to not good enough of an encapsulation of the available information, and the too large lag depths will likely overfit due to fitting noice, and this is exactly what the validation test shows. The mean squared error of the set with lag depth of five is the smallest. Next we move on to **'d_retraining.py'** where the lag-5 set of features is trained again on the training and validation sets joined together. A new fit is created and consequently examined on the test set in the file **'e_test'**, where predictive capabilities are tested against the last 10% of the dataset labels. After evaluating the limitations in predicting returns, the project's goal becomes predicting volatility (actually volatility-squared, but the idea is the same). In the file **'f_volatility_lin_reg.py'** Sklearn's Linear Regression model is used on the squared volatility. The average value of returns is assumed to be zero, even though it is 0.0005232224449712125, because the value is small enough in comparison with the returns themselves: positive and negative signs alternate a lot.\
 
 ### Pickle files
-The trained fits are stored in the folder 'models' as pickle files.
+The trained fits are stored in the folder 'models' as pickle files. The two stages of the project are put in separate folders: one folder for trying to predict returns, and one folder for predicting volatility.
 
 
 ## Visualization
