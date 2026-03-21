@@ -46,20 +46,20 @@ r2_score: -0.0253521931414169\
 mda: 0.5\
 The thresholds are: for r-squared above-zero results suggest prediction capability, for mean-directional accuracy, values above 0.5 mean that the model is better than random chance. Neither of those criteria are met with the given data, features and ML model. Next logical step is to figure out weather the data itself contains any meaningful autocorrelation. Only if they do, it would make sence to investigate further details, like hyperparameters (which lag depths under-or-overfit), or the type of model (maybe linear regression is not optimal).
 ### Part Two - Volatility
-**Results of Linear Regression:**
-mse_train: 1.3016003899739223e-07
-mse_test: 1.941984321458129e-08
-r2_train: 0.12944993555656714
-r2_test: -0.18892325699671897
-**Results of Decision Tree Regressor:**
-mse_train: 1.1394191624112496e-18
-mse_test: 4.4155109851373514e-08
-r2_train: 0.9999999999923792
-r2_test: -1.7032678089865199
-**Results of Random Forest:**
-mse_train: 2.3618904418768282e-08
-mse_test: 2.0291066125388975e-08
-r2_train: 0.6859129977844158
-r2_test: -4.349779590668786
+**Results of Linear Regression:**\
+mse_train: 1.3016003899739223e-07\
+mse_test: 1.941984321458129e-08\
+r2_train: 0.12944993555656714\
+r2_test: -0.18892325699671897\
+**Results of Decision Tree Regressor:**\
+mse_train: 1.1394191624112496e-18\
+mse_test: 4.4155109851373514e-08\
+r2_train: 0.9999999999923792\
+r2_test: -1.7032678089865199\
+**Results of Random Forest:**\
+mse_train: 2.3618904418768282e-08\
+mse_test: 2.0291066125388975e-08\
+r2_train: 0.6859129977844158\
+r2_test: -4.349779590668786\
 
 ##### The project is still in development.
