@@ -3,24 +3,20 @@
 Researching the autocorrelation in the dataset, containing  daily closing price of S&P 500 (Standard and Poor's 500: a stock market index tracking the stock performance of 500 leading companies listed on stock exchanges in the United States) for the period from November 2nd 2020 to October 31st 2025 and applying ML models to predict future values.
 I model logarithmic returns rather than price levels because price is non-stationary and dominated by drift, whereas returns are approximately stationary and appropriate for autoregressive modeling.
 
-
 ## Features
-
-The labels are logarithmic returns: R = Log(P_(i)/P_(i-1)) = Log(P(i)) - Log(P(i-1)) and the features are time-shifted log returns, because the interest of this project is to monitor autocorrelation of time series. I loaded the dataset from my desktop, but it is uploaded (under the name 'SP_close_price_5Y.csv') to this repository in the folder called 'data', so you can download the csv file and recreate or modify the project on your computer if you want to. I downloaded the dataset from this website:  (**https://mavenanalytics.io/data-drills/turning-bullish**).
-
+### Part One
+The labels are logarithmic returns: R = Log(P_(i)/P_(i-1)) = Log(P(i)) - Log(P(i-1)) and the features are time-shifted log returns, because the interest of this project is to monitor autocorrelation of time series. I loaded the dataset from my desktop, but it is uploaded (under the name 'SP_close_price_5Y.csv') to this repository in the folder called 'data', so you can download the csv file and recreate or modify the project on your computer if you want to. I downloaded the dataset with daily closing price from this website:  (**https://mavenanalytics.io/data-drills/turning-bullish**).
+### Part Two
+Since log returns turned out to be very difficult to predict (or maybe impossible for the given dataset - they showed incredibly weak autocorrelation on the Ljung-Box test), the next part of the project will attempt to predict volatility (volatility-squared, but the idea is the same: ignoring sign and predicting magnitude).
 
 ## Model
-
 ### Python files
 The python files with the main code are in the source folder, called 'src'. The train-validation-test split is chronological with 80%-10%-10% ratio.The files are meant to be read in alphabetical order: starting with **‘a_lag_features.py’**, where we create a function that generates features from the dataset. In the file **‘b_training_models.py’**, different versions of Linear Regression are trained and the trained fits are saved in pickle files, that can later be opened in another file. In the file **‘c_validation.py’** the pickles with the saved fits are opened and tested on the validation set, where the point is to compare the different sets of features, each with different lag depth, and the plots and mean squared errors are shown in the notebook ‘validation_plots.ipynb’.
 The code isn’t as clean as it can be, but it does get the job done as the results clearly demonstrate: as one might logically conclude, the smaller lag depths are likely to underfut due to not good enough of an encapsulation of the available information, and the too large lag depths will likely overfit due to fitting noice, and this is exactly what the validation test shows. The mean squared error of the set with lag depth of five is the smallest. Next we move on to **'d_retraining.py'** where the lag-5 set of features is trained again on the training and validation sets joined together. A new fit is created and consequently examined on the test set in the file **'e_test'**, where predictive capabilities are tested against the last 10% of the dataset labels. After evaluating the limitations in predicting returns, the project's goal becomes predicting volatility (actually volatility-squared, but the idea is the same). In the file **'f_volatility_lin_reg.py'** Sklearn's Linear Regression model is used on the squared volatility. The average value of returns is assumed to be zero, even though it is 0.0005232224449712125, because the value is small enough in comparison with the returns themselves: positive and negative signs alternate a lot.\
-
 ### Pickle files
-The trained fits are stored in the folder 'models' as pickle files. The two stages of the project are put in separate folders: one folder for trying to predict returns, and one folder for predicting volatility.
-
+The trained fits are stored in the folder 'models' as pickle files. The two stages of the project are put in separate folders: one folder for trying to predict returns ('fit_#.pkl', where # is a number, indicating the lag-depth), and one folder for predicting volatility ('fit_10_lin_reg.pkl'- the Linear Regression model,'fit_10_tree_reg.pkl'- the Decision Tree Regression,'fit_10_forest_reg.pkl'-the Random Forest Regression, where the number 10 indicates lag depth of 10 days, because the squared returns show the highest autocorrelation there, shown by the Ljung-Box test).
 
 ## Visualization
-
 Every part of the project is visualized on the Jupyter Notebooks that are ordered numerically:\
 **'1_data_visualization.ipynb'** shows a plot of the time series of the daily closing price of S&P-500 from 2020 to 2025 and a plot of the logarithmic returns for the same period.\
 **'2_features.ipynb'** shows tables of some examples of the features, which are the lagged daily returns.\
@@ -32,8 +28,8 @@ Every part of the project is visualized on the Jupyter Notebooks that are ordere
 **'8_volatility_prediction.ipynb'** gives numeric results (mean-squared error and R-squared score on the training set and test set) and visualization of the Linear Regression model, applied on the auto-correlation of S&P-500's daily volatility.
 
 ## Results
-
-### Validation
+### Part One - Returns
+#### Validation
 The results of the trained models with different lag depths, on the validation test, are given below:\
 mse_2_val: 0.00025336930547826414\
 mse_3_val: 0.00025090380979842555\
@@ -42,14 +38,28 @@ mse_7_val: 0.00025201486965832794\
 mse_11_val: 0.00025789092386182226\
 mse_15_val: 0.0002592820095214613\
 The mse of the lag-depth-5 model is the smallest, so this is the set of features that wins the validation stage and moves on to retraining.
-
-### Test
+#### Test
 The test results are:\
 mse: 5.20020658206141e-05\
 rms_test: 0.007211245788392883\
 r2_score: -0.0253521931414169\
 mda: 0.5\
 The thresholds are: for r-squared above-zero results suggest prediction capability, for mean-directional accuracy, values above 0.5 mean that the model is better than random chance. Neither of those criteria are met with the given data, features and ML model. Next logical step is to figure out weather the data itself contains any meaningful autocorrelation. Only if they do, it would make sence to investigate further details, like hyperparameters (which lag depths under-or-overfit), or the type of model (maybe linear regression is not optimal).
+### Part Two - Volatility
+**Results of Linear Regression:**
+mse_train: 1.3016003899739223e-07
+mse_test: 1.941984321458129e-08
+r2_train: 0.12944993555656714
+r2_test: -0.18892325699671897
+**Results of Decision Tree Regressor:**
+mse_train: 1.1394191624112496e-18
+mse_test: 4.4155109851373514e-08
+r2_train: 0.9999999999923792
+r2_test: -1.7032678089865199
+**Results of Random Forest:**
+mse_train: 2.3618904418768282e-08
+mse_test: 2.0291066125388975e-08
+r2_train: 0.6859129977844158
+r2_test: -4.349779590668786
 
-
-#### The project is still in development.
+##### The project is still in development.
