@@ -25,7 +25,8 @@ Every part of the project is visualized on the Jupyter Notebooks that are ordere
 **'5_retraining_results.ipynb'** simply visualizes the trained fit alongside the labels.\
 **'6_test_results_evaluation.ipynb'** shows a plot of the newly trained fit's prediction on the test set vs. the actul labels (returns). Then parameters evaluating model predictive capability are given. The only one of them that looks optimistic is the very small mean squared error, but this can be explained with the values, that are beig measured/predicted, themselves being very small. The R^2 score being negative suggests that the model doesn't have the power to predict new values, and the directional accuracy of 0.5 confirms that judgement.\
 **'7_troubleshooting.ipynb'** investigates weather the labels are at all autocorrelated. Log returns themselves seem to be time independent, so the poor performance of the model shouldn't be such a surprice. On the other hand their squared values show very strong autocorrelation, so instead of returns, the dataset has more potential to predict volatility. The results in this notebook explain the reasoning behind the pivot of the whole project's goal in the future.\
-**'8_volatility_prediction.ipynb'** gives numeric results (mean-squared error and R-squared score on the training set and test set) and visualization of the Linear Regression model, applied on the auto-correlation of S&P-500's daily volatility.
+**'8_volatility_prediction_linear_and_tree.ipynb'** gives numeric results (mean-squared error and R-squared score on the training set and test set) and visualization of the Linear Regression and Decision Tree models, applied on the auto-correlation of S&P-500's daily volatility.\
+**'9_volatility_prediction_forest.ipynb'** does the same thing like notebook No:8, but for Random Forest model.
 
 ## Results
 ### Part One - Returns
